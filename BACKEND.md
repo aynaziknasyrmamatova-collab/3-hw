@@ -66,6 +66,14 @@ README.md
 
 Почему так: base — единая точка правды. Dev и Prod только “переопределяют” то, что отличается.
 
+### JWT API
+
+- `POST /api/token/` возвращает access/refresh токены и пользователя (`id`, `email`, `username`, `role`).
+- Access токен действует 15 минут, refresh токен — 7 дней.
+- `POST /api/logout/` (с access токеном в `Authorization: Bearer ...`) принимает `refresh` в JSON body и добавляет его в blacklist.
+- `POST /api/token/refresh/` обновляет access токен; заблокированный refresh токен отклоняется.
+- `GET /api/profile/stats/` (с access токеном) возвращает `email`, `role`, `is_staff` и `date_joined`.
+
 2.2 core/settings/development.py (dev.py) — локальная разработка
 
 Тут:
